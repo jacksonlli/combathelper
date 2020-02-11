@@ -1,13 +1,10 @@
-import mysql.connector
+import pymongo
 from flask import Flask, request , jsonify, abort, make_response
 app = Flask(__name__)
 
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  passwd="w4m973fy4u",
-  database="game1"
-)
+myclient = pymongo.MongoClient("mongodb+srv://jawkly:GKJP3QM9M9GeWIFA@cluster0-sj7sy.mongodb.net/test?retryWrites=true&w=majority")
+mydb = myclient["Jackson_DB"]
+
 
 @app.route('/')
 def hello():
@@ -16,10 +13,8 @@ def hello():
 # Get all players
 @app.route('/player', methods=['GET'])
 def get_players():
-    mycursor = mydb.cursor()
-    mycursor.execute("SELECT id, name FROM player")
-   # myresult = list(mycursor.fetchall())
-    myresult = [{'id':row[0], 'name':row[1]} for row in mycursor.fetchall()]
+    mycol = mydb["PC"]
+    myresult = mycol.find({}, {"_id": 0, "name": 1})
     return jsonify(myresult)
 
 # Run Server
