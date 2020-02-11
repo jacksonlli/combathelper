@@ -6,7 +6,6 @@ app.config["MONGO_URI"] = "mongodb+srv://jawkly:GKJP3QM9M9GeWIFA@cluster0-sj7sy.
 mongo = PyMongo(app)
 
 
-
 @app.route('/')
 def hello():
     return "<h1> my backend!!! </h1>"
