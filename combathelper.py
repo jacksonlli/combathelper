@@ -1,6 +1,5 @@
 import mysql.connector
 from flask import Flask, request , jsonify, abort, make_response
-from flask_marshmallow import Marshmallow
 app = Flask(__name__)
 
 ma = Marshmallow(app)
