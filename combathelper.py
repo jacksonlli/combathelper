@@ -19,8 +19,9 @@ def get_players():
     mycursor = mydb.cursor()
     mycursor.execute("SELECT id, name FROM player")
    # myresult = list(mycursor.fetchall())
-
     myresult = [{'id':row[0], 'name':row[1]} for row in mycursor.fetchall()]
-
-
     return jsonify(myresult)
+
+# Run Server
+if __name__ == '__main__':
+    app.run(debug=False)

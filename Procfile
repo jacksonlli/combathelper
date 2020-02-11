@@ -1,1 +1,1 @@
-web: gunicorn combathelper:app
+web:gunicorn combathelper:app
