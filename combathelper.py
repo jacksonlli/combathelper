@@ -1,9 +1,10 @@
 import pymongo
 from flask import Flask, request , jsonify, abort, make_response
+from flask_pymongo import PyMongo
 app = Flask(__name__)
+app.config["MONGO_URI"] = "mongodb+srv://jawkly:GKJP3QM9M9GeWIFA@cluster0-sj7sy.mongodb.net/test?retryWrites=true&w=majority/Jackson_DB"
+mongo = PyMongo(app)
 
-myclient = pymongo.MongoClient("mongodb+srv://jawkly:GKJP3QM9M9GeWIFA@cluster0-sj7sy.mongodb.net/test?retryWrites=true&w=majority")
-mydb = myclient["Jackson_DB"]
 
 
 @app.route('/')
@@ -13,7 +14,7 @@ def hello():
 # Get all players
 @app.route('/player', methods=['GET'])
 def get_players():
-    mycol = mydb["PC"]
+    mycol = mongo.db.PC
     myresult = mycol.find({}, {"_id": 0, "name": 1})
     return jsonify(myresult)
 
